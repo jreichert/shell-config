@@ -1,1 +1,2 @@
 Plug 'ludovicchabant/vim-gutentags'
+Plug 'kana/vim-textobj-line'

@@ -12,6 +12,4 @@ cp -R ~/.EverVim/custom_scripts .Evervim
 cp -R ~/.ctags.d .
 
 # Set up Git
-mkdir -p usr/local/bin
-cp /usr/local/bin/diffmerge.sh usr/local/bin
 cp ~/.gitconfig .

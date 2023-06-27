@@ -201,8 +201,18 @@
     " colorscheme 0x7A69_dark; does not currently work
     hi DiffAdd term=bold ctermfg=0 ctermbg=4 guibg=DarkBlue
 
+
     " save this in /Documents so it is accessible from other machines
-    let g:vimwiki_list = [{'path': '~/Documents/vimwiki/'}]
+	" Use Dark Vimwiki HTML Template:
+	" https://github.com/rahul13ramesh/Dark-Vimwiki-Template
+      let g:vimwiki_list = [{'path': '~/Documents/vimwiki/',
+			  \ 'template_path': '~/.EverVim/wiki/templates',
+			  \ 'template_default': 'def_template',
+			  \ 'template_ext': '.html'}]
+	
+	" add the pre tag for inserting code snippets
+	let g:vimwiki_valid_html_tags = 'b,i,s,u,sub,sup,kbd,br,hr, pre, script'
+
     " Use the block below to use Markdown for the vimwiki syntax;
     " Note the path variable, make sure it is set correctly.
     " let g:vimwiki_list = [{'path': '~/vimwiki/',
@@ -249,7 +259,6 @@
           \ , 'ctagsbin':'~/.vim/custom_scripts/vwtags.py'
           \ , 'ctagsargs': 'default'
           \ }
-
-
+  
 " }
 
