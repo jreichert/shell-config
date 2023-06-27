@@ -1,0 +1,5 @@
+" Put any variables in here that MUST be set after EverVim loads everthing
+" else.  Typically, this will be because you need to override the default
+" settings that EverVim has assigned to the built-in plugins.
+"
+let g:nerdtree_tabs_synchronize_view=1

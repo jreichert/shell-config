@@ -73,7 +73,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(ag alias-finder aliases asdf aws brew bundler colored-man-pages common-aliases dirhistory docker gh git rails ruby)
+plugins=(ag alias-finder aliases asdf aws brew bundler colored-man-pages common-aliases dirhistory docker gh git rails ruby zsh-interactive-cd zsh-navigation-tools zsh-autosuggestions )
 source $ZSH/oh-my-zsh.sh
 
 #eval "$(pyenv virtualenv-init -)"
@@ -87,10 +87,10 @@ export ZSH_ALIAS_FINDER_AUTOMATIC=true
 
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
+  export EDITOR='vim'
 # else
-#   export EDITOR='mvim'
-# fi
+#  export EDITOR='mvim'
+#fi
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -109,3 +109,5 @@ alias gum="git checkout --conflict=merge"
 alias gdtl="git difftool --no-prompt"
 alias gdtlvim="git difftool --no-prompt --tool=vimdiff"
 #alias gcm="git commit -m"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
