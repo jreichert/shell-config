@@ -1,5 +1,21 @@
 " Put any variables in here that MUST be set after EverVim loads everthing
 " else.  Typically, this will be because you need to override the default
 " settings that EverVim has assigned to the built-in plugins.
+" TODO: for some reason <leader> in .EverVim.vimrc is picking up the value
+" of local leader.  figure out why, but workaround for now is to put any
+" remaps that start with the leader in this file instead.
 "
+
 let g:nerdtree_tabs_synchronize_view=1
+let g:nerdtree_tabs_open_on_new_tab=1
+let g:vimwiki_folding="expr:quick"
+"nnoremap <Leader>nt :NERDTreeToggle<CR> :NERDTreeTabsToggle<CR>
+"nnoremap <C-e> :NERDTreeTabsToggle<CR>
+
+" shortcut to completely close the current buffer
+nnoremap <Leader>bw :bwipeout<CR>
+
+" List all currently available shortcuts in new vsplit
+command ListShortcuts Redir verbose map
+nnoremap <leader>sh :ListShortcuts<CR>
+

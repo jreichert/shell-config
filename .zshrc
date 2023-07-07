@@ -101,8 +101,8 @@ export ZSH_ALIAS_FINDER_AUTOMATIC=true
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
+alias zshconfig="vim ~/.zshrc"
+alias vimwiki="vim -c VimwikiIndex"
 
 # git shortcuts (there are many more from the git and gh plugins too)
 alias gum="git checkout --conflict=merge"

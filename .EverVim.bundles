@@ -1,2 +1,4 @@
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'kana/vim-textobj-line'
+Plug 'junegunn/vim-easy-align'
+Plug 'dhruvasagar/vim-table-mode'

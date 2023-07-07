@@ -5,13 +5,10 @@
 "   Licensed under
 "       * Apache License, Version 2.0, ([LICENSE-APACHE](LICENSE.md) or http://www.apache.org/licenses/LICENSE-2.0)
 " }
-
 " EverVim options {
-
 " Disable folding
 "   let g:evervim_disable_folding=1
 "
-
 " EverVim Bundle Groups
 " Bundle Group name is just folders under ~/.EverVim/plugins
 " Below is the default config, uncomment and make your own
@@ -40,9 +37,9 @@ let g:evervim_bundle_groups=[
 
 " Determine whether the current session supports full gui colors or only
 " console colors
-if $TERM =~ '^\(rxvt\|screen\|interix\|putty\)\(-.*\)\?$'
+if $TERM =~ '^\(rxvt\                                                                                                                                                                          screen\  interix\  putty\)\(-.*\)\?$'
     set notermguicolors
-elseif $TERM =~ '^\(tmux\|iterm\|vte\|gnome\)\(-.*\)\?$'
+elseif $TERM =~ '^\(tmux\                                                                                                                                                                      iterm\   vte\      gnome\)\(-.*\)\?$'
     set termguicolors
 elseif $TERM =~ '^\(xterm\)\(-.*\)\?$'
     if $LC_TERMINAL == 'iTerm2'
@@ -82,7 +79,7 @@ let g:evervim_font="Agave Nerd Font Mono"
 " Simply uncomment the following line and add remove plugins in the
 " ~/.EverVim.bundles file using `Plug` and `UnPlug` commands
 let g:override_evervim_bundles = 1
-"
+
 " in ~/.EverVim.bundles,
 "   Plug 'Someone/AwesomePlugin'
 "   UnPlug 'Someone/PluginToDisable'
@@ -104,8 +101,8 @@ let g:header_field_author_email = 'jake@jakereichert.com'
 "   let g:evervim_welcome_message = "Code your life with EverVim!"
 
 " Leader keys
-"   let g:evervim_leader=','
-"   let g:evervim_localleader='\\'
+   let g:evervim_leader=','
+   let g:evervim_localleader='\\'
 
 " Restore cursor
 " Automatically restore your cursor to the place you left
@@ -160,7 +157,6 @@ let g:evervim_clear_search_highlight = 0
 " vim files directory
 "   let g:evervim_consolidated_directory = <full path to desired directory>
 "   eg: let g:evervim_consolidated_directory = $HOME . '/.vim/'
-
 " This makes the completion popup strictly passive.
 " Keypresses acts normally. <ESC> takes you of insert mode, words don't
 " automatically complete, pressing <CR> inserts a newline, etc. Iff the
@@ -204,6 +200,7 @@ let g:evervim_80_column_warning = 1
 "   let g:multi_cursor_prev_key='<C-p>'
 "   let g:multi_cursor_skip_key='<C-x>'
 "   let g:multi_cursor_quit_key='<Esc>'
+
 " Require a special keypress to enter multiple cursors mode
 "   let g:multi_cursor_start_key='+'
 
@@ -223,41 +220,214 @@ set shell=/bin/zsh
 " terrible console mode colors.  Should probably try to figure
 " out programatically (if possible) whether the current tty
 " supports them, and choose the colorscheme accordingly.
-
 " Needed for running fzf
 set rtp+=/usr/local/opt/fzf
 
-" Turn of highlighting from last search with an extra <CR>
+" Turn of highlighting from last search with an extra <CR>.
+" Does not currently work; the "wildfire fuel" plugin is highlighting <CR>
+" to do a visual select of the current block.
 nnoremap <silent> <CR> :nohlsearch<BAR>:echo<CR>
+
+" shortcut to completely close the current buffer
+nnoremap <Leader>bw :bwipeout<CR>
+
+function s:format_shortcuts()
+    "ListShortcuts
+
+    execute Redir echo "hello"
+    " join every other line
+    "%normal J
+
+    " delete all lines not containing a line number
+    " TODO: there are a small # of shortcuts at the end of the doc that this gets rid of.  Figure out what they are and where they come from.
+    "silent! g!/line/de
+
+    " for shortcuts with unknown mode, use '?'
+	"silent! %s/^ /?/e
+	
+	" remove all unmapped plugin shortcuts
+	"silent! g/^[n,v,x,o,s,?, ]\{3\}<Plug>/de
+	
+	" Normalize formatting of remaining lines; relies on using '\\\\\'
+	" as the column separator, so assumes that isn't present in any table content
+	"silent! %s/^\([n,v,x,o,s,?, ]\{3\}\)\(\S*\)\s* \(.*\) Last set from \(.*\) line \(.*\)/\1\\\\\\\\\\\2\\\\\\\\\\\3\\\\\\\\\\\4\\\\\\\\\\\5/e
+	
+	" Add header
+	"normal ggOMODE\\\\\\\\\\SHORTCUT\\\\\\\\\\COMMAND\\\\\\\\\\FILE\\\\\\\\\\LINE
+	
+	" Escape any pipe characters (needed for vim-table-mode plugin)
+	"silent! %s/|/\\|/ge
+	
+	" Tablize
+	"silent! %Tableize/\\\\\\\\\\
+	
+	" Undo previous escaping
+	"%s/\\|/ \|/ge
+	"silent! %s/\\|/ \|/g
+	
+	" Return to top
+	"normal gg
+endfunction
+command FormatShortcuts :call s:format_shortcuts()<CR>
+" command FormatShortcuts Redir verbose map
+
+" NERDTree
+"nnoremap <Leader>na <plug>NERDTreeTabsToggle<CR>
+" nnoremap <Leader>na :NERDTreeTabsToggle<CR>
+map <C-e> <plug>NERDTreeTabsToggle<CR>
+
+" Easy Align
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
 
 " The Silver Searcher: replace ack with ag (faster version)
 let g:ackprg = 'ag --nogroup --nocolor --column'
 " let g:ackprg = 'ag --vimgrep'
 
-" COLORS
-" Make vimdiff bearable (using Selenized or similar colorscheme)
-" colorscheme 0x7A69_dark; does not currently work
-" hi DiffAdd term=bold ctermfg=0 ctermbg=4 guibg=DarkBlue
+" ########## PERSONAL FUNCTIONS ########## "
+" Show the output of any command in a new vsplit
+function! Redir(cmd, rng, start, end)
+    for win in range(1, winnr('$'))
+        if getwinvar(win, 'scratch')
+            execute win . 'windo close'
+        endif
+    endfor
+    if a:cmd =~ '^!'
+        let cmd = a:cmd =~' %'
+                    \ ? matchstr(substitute(a:cmd, ' %', ' ' . shellescape(escape(expand('%:p'), '\')), ''), '^!\zs.*')
+                    \ : matchstr(a:cmd, '^!\zs.*')
+        if a:rng == 0
+            let output = systemlist(cmd)
+        else
+            let joined_lines = join(getline(a:start, a:end), '\n')
+            let cleaned_lines = substitute(shellescape(joined_lines), "'\\\\''", "\\\\'", 'g')
+            let output = systemlist(cmd . " <<< $" . cleaned_lines)
+        endif
+    else
+        redir => output
+        execute a:cmd
+        redir END
+        let output = split(output, "\n")
+    endif
+    vnew
+    let w:scratch = 1
+    setlocal buftype=nofile bufhidden=wipe nobuflisted noswapfile
+    call setline(1, output)
+endfunction
 
+" Uncomment one of the two versions of the command below.  See comments for
+" each.
+" This command definition includes -bar, so that it is possible to "chain"
+" Vim commands. Side effect: double quotes can't be used in external commands
+"commad! -nargs=1 -complete=command -bar -range Redir silent call Redir(<q-args>, <range>, <line1>, <line2>)
+" This command definition doesn't include -bar, so that it is possible to use double quotes in external commands.
+" Side effect: Vim commands can't be "chained".
+command! -nargs=1 -complete=command -range Redir silent call Redir(<q-args>, <range>, <line1>, <line2>)
 
-" save this in /Documents so it is accessible from other machines
+  augroup VimrcAuGroup
+    autocmd!
+    autocmd FileType vimwiki setlocal foldmethod=expr |
+      \ setlocal foldenable
+  augroup END
+
+" ########## VIMWIKI ############## "
+" save this in ~/Documents so it is accessible from other machines
 " Use Dark Vimwiki HTML Template
 " https://github.com/rahul13ramesh/Dark-Vimwiki-Template
-let g:vimwiki_list = [{'path': '~/Documents/vimwiki/',
+" TODO: I couldn't figure out a better way to do this, so I'm
+" setting/unsetting the variable below in after/ftplugin/vimwiki.vim
+"  let g:vim_markdown_folding_disabled=1
+let g:vimwiki_global_ext = 0
+  let g:vimwiki_list = [{'path': '~/Documents/vimwiki/',
+            \ 'syntax': 'markdown', 'ext': '.md', 'auto_toc': 1, 'auto_tags': 1,
+            \ 'custom_wiki2html': '/Users/jake/.asdf/installs/python/3.10.10/lib/python3.10/site-packages/vimwiki_markdown.py',
             \ 'template_path': '~/.EverVim/wiki/templates',
             \ 'template_default': 'def_template',
-            \ 'template_ext': '.html'}]
+            \ 'template_ext': '.html',
+            \ 'html_filename_parameterization': 1}]
+" let g:vimwiki_list = [{'path': '~/Documents/vimwiki/',
+"             \ 'template_path': '~/.EverVim/wiki/templates',
+"             \ 'template_default': 'def_template',
+"             \ 'template_ext': '.html'}]
 
+let g:vimwiki_markdown_link_ext=0
+"let g:vimwiki_ext2syntax={'.md': 'markdown'}
+"let g:vimwiki_filetypes = ['markdown']
+"let g:vimwiki_custom_wiki2html='~/.EverVim/custom_scripts/pandoc_md2html.sh'
 " add the pre tag for inserting code snippets
 let g:vimwiki_valid_html_tags = 'b,i,s,u,sub,sup,kbd,br,hr, pre, script'
-
 " Use the block below to use Markdown for the vimwiki syntax;
 " Note the path variable, make sure it is set correctly.
 " let g:vimwiki_list = [{'path': '~/vimwiki/',
 "     \ 'syntax': 'markdown', 'ext': '.md'}]
-" let g:vimwiki_global_ext = 0
 
+" ####### STARTIFY ######## "
+" pull in a custom ASCII art header if one exists
+" source ~/.vimrc.startify-logo
+"let g:startify_custom_header =
+"             \ startify#pad(readfile('/Users/Jake/Downlaods/banner.txt'))
 
+" add any bookmarks here that you want in Startify
+let g:startify_bookmarks = [
+            \ { 'w': '~/Documents/vimwiki/index.wiki' },
+            \ { 'b': '~/.EverVim.bundles' },
+            \ { 'a': '~/.EverVim.vimrc.after' }
+            \ ]
+
+" add any programs you wish to run here.  Shell programs can be run by
+" prefixing the command with '!'
+function s:startify_functions()
+    return [
+                \ { 'line': 'Show shortcuts', 'cmd': 'ListShortcuts' },
+                \ { 'line': 'Install or Update VIM plugins', 'cmd': 'PlugInstall' },
+                \ { 'line': 'Play Zork 285', 'cmd': '!frotz ~/Downloads/zork_285.z5' },
+                \  ]
+endfunction
+
+function Get_shortcuts()
+    let shortcuts = "n  ,nt  NERDTree"
+    let mode = matchstr(shortcuts, ' *.* *')
+    "let mode = matchstr(shortcuts, ' *.* *')
+    return mode
+endfunction
+
+" returns all modified files of the current git repo
+" `2>/dev/null` makes the command fail quietly, so that when we are not
+" in a git repo, the list will be empty
+function! s:gitModified()
+    let files = systemlist('git ls-files -m 2>/dev/null')
+    return map(files, "{'line': v:val, 'path': v:val}")
+endfunction
+
+" same as above, but show untracked files, honouring .gitignore
+function! s:gitUntracked()
+    let files = systemlist('git ls-files -o --exclude-standard 2>/dev/null')
+    return map(files, "{'line': v:val, 'path': v:val}")
+endfunction
+
+" Read ~/.NERDTreeBookmarks file and takes its second column
+function! s:nerdtreeBookmarks()
+    let bookmarks = systemlist("cut -d' ' -f 2- ~/.NERDTreeBookmarks")
+    let bookmarks = bookmarks[0:-2] " Slices an empty last line
+    return map(bookmarks, "{'line': v:val, 'path': v:val}")
+endfunction
+
+let g:startify_lists = [
+            \ { 'type': 'dir',       'header': ['   MRU '. getcwd()] },
+            \ { 'type': 'files',     'header': ['   MRU']            },
+            \ { 'type': 'sessions',  'header': ['   Sessions']       },
+            \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
+            \ { 'type': function('s:startify_functions'), 'header': ['  Programs'] },
+            \ { 'type': function('s:nerdtreeBookmarks'), 'header': ['   NERDTree Bookmarks']},
+            \ { 'type': function('s:gitModified'),  'header': ['   git modified']},
+            \ { 'type': function('s:gitUntracked'), 'header': ['   git untracked']},
+            \ { 'type': 'commands',  'header': ['   Commands']       },
+            \ ]
+
+" ######## TAGBAR ######### "
 " enables tsx support in Tagbar
 let g:tagbar_type_typescriptreact = {
             \ 'ctagstype': 'tsx',
@@ -297,5 +467,4 @@ let g:tagbar_type_vimwiki = {
             \ , 'ctagsbin':'~/.EverVim/custom_scripts/vwtags.py'
             \ , 'ctagsargs': 'default'
             \ }
-
 " }
