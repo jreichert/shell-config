@@ -12,3 +12,5 @@ email = jake@jakereichert.com
 [mergetool "diffmerge"]
 	trustExitCode = true
 	cmd = /usr/local/bin/diffmerge.sh --merge --result=\"$MERGED\" \"$LOCAL\" \"$BASE\" \"$REMOTE\"
+[init]
+	defaultBranch = main

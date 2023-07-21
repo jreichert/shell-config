@@ -9,6 +9,8 @@
 let g:nerdtree_tabs_synchronize_view=1
 let g:nerdtree_tabs_open_on_new_tab=1
 let g:vimwiki_folding="expr:quick"
+
+nnoremap <Leader>tg :TagbarToggle<CR>
 "nnoremap <Leader>nt :NERDTreeToggle<CR> :NERDTreeTabsToggle<CR>
 "nnoremap <C-e> :NERDTreeTabsToggle<CR>
 

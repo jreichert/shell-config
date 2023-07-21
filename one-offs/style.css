@@ -78,16 +78,16 @@ h1{
     text-decoration: underline;
     text-decoration-thickness: 10px;
     text-decoration-color: #ff9800;
-    text-underline-offset: 7px;
-    padding-bottom: 10px;
+    text-underline-offset: 9px;
+    padding-bottom: 14px;
 }
 
 h2{
     text-decoration: underline;
     text-decoration-thickness: 6px;
     text-decoration-color: #ef6c00;
-    text-underline-offset: 5px;
-    padding-bottom: 10px;
+    text-underline-offset: 7px;
+    padding-bottom: 12px;
 }
 
 h3{
@@ -95,7 +95,7 @@ h3{
     text-decoration-thickness: 4px;
     text-decoration-color: #ff5722;
     text-underline-offset: 5px;
-    padding-bottom: 7px;
+    padding-bottom: 9px;
 }
 
 h4{

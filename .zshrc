@@ -73,24 +73,33 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(ag alias-finder aliases asdf aws brew bundler colored-man-pages common-aliases dirhistory docker gh git rails ruby zsh-interactive-cd zsh-navigation-tools zsh-autosuggestions )
+plugins=(ag alias-finder aliases asdf aws brew bundler colored-man-pages common-aliases dirhistory docker gh git \
+    OhMyZsh-full-autoupdate rails ruby zsh-interactive-cd zsh-navigation-tools zsh-autosuggestions zsh-pipx zsh-poetry zsh-vi-mode )
 source $ZSH/oh-my-zsh.sh
 
+# maybe this can be done using plugins instead
+# autoload -U bashcompinit
+# bashcompinit
+
 #eval "$(pyenv virtualenv-init -)"
+
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
 export ZSH_ALIAS_FINDER_AUTOMATIC=true
+export TODOIST_API_KEY="$(pass Todoist/API)"
+export EDITOR='nvim'
 
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
+# use this instead to switch editors depending on if this is an ssh session or not
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='vim'
+#  export EDITOR='nvim'
 # else
 #  export EDITOR='mvim'
 #fi
+
+# You may need to manually set your language environment
+# export LANG=en_US.UTF-8
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -99,8 +108,14 @@ export ZSH_ALIAS_FINDER_AUTOMATIC=true
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
-#
-# Example aliases
+
+# use GNU ls for better coloring
+alias ls="gls --color=always"
+# moving over to nvim
+alias vim=nvim
+alias vi=nvim
+
+alias whereami="echo $HOST"
 alias zshconfig="vim ~/.zshrc"
 alias vimwiki="vim -c VimwikiIndex"
 
@@ -110,4 +125,15 @@ alias gdtl="git difftool --no-prompt"
 alias gdtlvim="git difftool --no-prompt --tool=vimdiff"
 #alias gcm="git commit -m"
 
+# Python Virtualenv and venv; assumes you are always activating the virtual
+# environment of the current directory
+alias venvactivate="source ./venv/bin/activate"
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# Created by `pipx` on 2023-07-10 17:42:43
+export PATH="/usr/local/opt/postgresql@15/bin:$PATH:/Users/jake/.local/bin"
+
+# Colorized output via GNU ls (i.e. gls)
+source ~/LS_COLORS/lscolors.sh
+

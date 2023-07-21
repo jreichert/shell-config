@@ -15,8 +15,12 @@
 * [universal-ctags](https://ctags.io/): creates tags used by vim for code 
   navigation (may work with exuberant ctags but unsure)
 * [YouCompleteMe](https://ycm-core.github.io/YouCompleteMe/): Code completion engine
-* Optional: [DiffMerge](https://sourcegear.com/diffmerge/): Git diff/merge tool 
+* GNU coreutils: `brew install coreutils`
+
+#### Optional (but recommended)
+* [DiffMerge](https://sourcegear.com/diffmerge/): Git diff/merge tool 
   (however see note below if you do not install it)
+* NeoVim
 
 ### Installation 
 (TODO: Update the instructions as this isn't actually correct.

@@ -18,6 +18,9 @@
 # Config file for the user's shell (.zshrc, .bashrc, etc)
 SHELL_CONFIG=$HOME/.zshrc
 
+# Shell plugins
+SHELL_PLUGINS_DIR=$HOME/.oh-my-zsh/custom/plugins
+
 # Location of vim config, plugins, etc.  This probably needs
 # to be changed around for NeoVim since it puts things in 
 # different directories.

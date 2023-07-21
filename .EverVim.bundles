@@ -2,3 +2,7 @@ Plug 'ludovicchabant/vim-gutentags'
 Plug 'kana/vim-textobj-line'
 Plug 'junegunn/vim-easy-align'
 Plug 'dhruvasagar/vim-table-mode'
+Plug 'tpope/vim-unimpaired'
+Plug 'romgrk/todoist.nvim', { 'do': ':TodoistInstall' }
+Plug 'qpkorr/vim-bufkill'
+Plug 'github/copilot.vim'

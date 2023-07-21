@@ -101,8 +101,8 @@ let g:header_field_author_email = 'jake@jakereichert.com'
 "   let g:evervim_welcome_message = "Code your life with EverVim!"
 
 " Leader keys
-   let g:evervim_leader=','
-   let g:evervim_localleader='\\'
+let g:evervim_leader=','
+let g:evervim_localleader='\\'
 
 " Restore cursor
 " Automatically restore your cursor to the place you left
@@ -228,7 +228,9 @@ set rtp+=/usr/local/opt/fzf
 " to do a visual select of the current block.
 nnoremap <silent> <CR> :nohlsearch<BAR>:echo<CR>
 
-" shortcut to completely close the current buffer
+" shortcut to completely close the current buffer;
+" NOTE: this kills Vim if used with NERDTree.  For that, use the bufkil plugin
+" instead (:BD)
 nnoremap <Leader>bw :bwipeout<CR>
 
 function s:format_shortcuts()
@@ -243,30 +245,30 @@ function s:format_shortcuts()
     "silent! g!/line/de
 
     " for shortcuts with unknown mode, use '?'
-	"silent! %s/^ /?/e
-	
-	" remove all unmapped plugin shortcuts
-	"silent! g/^[n,v,x,o,s,?, ]\{3\}<Plug>/de
-	
-	" Normalize formatting of remaining lines; relies on using '\\\\\'
-	" as the column separator, so assumes that isn't present in any table content
-	"silent! %s/^\([n,v,x,o,s,?, ]\{3\}\)\(\S*\)\s* \(.*\) Last set from \(.*\) line \(.*\)/\1\\\\\\\\\\\2\\\\\\\\\\\3\\\\\\\\\\\4\\\\\\\\\\\5/e
-	
-	" Add header
-	"normal ggOMODE\\\\\\\\\\SHORTCUT\\\\\\\\\\COMMAND\\\\\\\\\\FILE\\\\\\\\\\LINE
-	
-	" Escape any pipe characters (needed for vim-table-mode plugin)
-	"silent! %s/|/\\|/ge
-	
-	" Tablize
-	"silent! %Tableize/\\\\\\\\\\
-	
-	" Undo previous escaping
-	"%s/\\|/ \|/ge
-	"silent! %s/\\|/ \|/g
-	
-	" Return to top
-	"normal gg
+    "silent! %s/^ /?/e
+
+    " remove all unmapped plugin shortcuts
+    "silent! g/^[n,v,x,o,s,?, ]\{3\}<Plug>/de
+
+    " Normalize formatting of remaining lines; relies on using '\\\\\'
+    " as the column separator, so assumes that isn't present in any table content
+    "silent! %s/^\([n,v,x,o,s,?, ]\{3\}\)\(\S*\)\s* \(.*\) Last set from \(.*\) line \(.*\)/\1\\\\\\\\\\\2\\\\\\\\\\\3\\\\\\\\\\\4\\\\\\\\\\\5/e
+
+    " Add header
+    "normal ggOMODE\\\\\\\\\\SHORTCUT\\\\\\\\\\COMMAND\\\\\\\\\\FILE\\\\\\\\\\LINE
+
+    " Escape any pipe characters (needed for vim-table-mode plugin)
+    "silent! %s/|/\\|/ge
+
+    " Tablize
+    "silent! %Tableize/\\\\\\\\\\
+
+    " Undo previous escaping
+    "%s/\\|/ \|/ge
+    "silent! %s/\\|/ \|/g
+
+    " Return to top
+    "normal gg
 endfunction
 command FormatShortcuts :call s:format_shortcuts()<CR>
 " command FormatShortcuts Redir verbose map
@@ -327,11 +329,11 @@ endfunction
 " Side effect: Vim commands can't be "chained".
 command! -nargs=1 -complete=command -range Redir silent call Redir(<q-args>, <range>, <line1>, <line2>)
 
-  augroup VimrcAuGroup
+augroup VimrcAuGroup
     autocmd!
     autocmd FileType vimwiki setlocal foldmethod=expr |
-      \ setlocal foldenable
-  augroup END
+                \ setlocal foldenable
+augroup END
 
 " ########## VIMWIKI ############## "
 " save this in ~/Documents so it is accessible from other machines
@@ -341,13 +343,13 @@ command! -nargs=1 -complete=command -range Redir silent call Redir(<q-args>, <ra
 " setting/unsetting the variable below in after/ftplugin/vimwiki.vim
 "  let g:vim_markdown_folding_disabled=1
 let g:vimwiki_global_ext = 0
-  let g:vimwiki_list = [{'path': '~/Documents/vimwiki/',
+let g:vimwiki_list = [{'path': '~/Documents/vimwiki/',
             \ 'syntax': 'markdown', 'ext': '.md', 'auto_toc': 1, 'auto_tags': 1,
             \ 'custom_wiki2html': '/Users/jake/.asdf/installs/python/3.10.10/lib/python3.10/site-packages/vimwiki_markdown.py',
             \ 'template_path': '~/.EverVim/wiki/templates',
             \ 'template_default': 'def_template',
-            \ 'template_ext': '.html',
-            \ 'html_filename_parameterization': 1}]
+            \ 'links_space_char': '-',
+            \ 'template_ext': '.html'}]
 " let g:vimwiki_list = [{'path': '~/Documents/vimwiki/',
 "             \ 'template_path': '~/.EverVim/wiki/templates',
 "             \ 'template_default': 'def_template',
