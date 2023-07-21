@@ -5,11 +5,14 @@
   no need to install)
 * [OhMyZsh](https://ohmyz.sh/): Zsh customization & plugins
 * [EverVim](https://github.com/LER0ever/EverVim): Vim distro prepackaged with 
-  several customizations & plugins
+  several customizations & plugins. **NOTE**: if you get errors installing this
+  with NeoVim, delete .Evervim and .Evervim.vimrc and try reinstalling with Vim.
+  You can then use NeoVim as normal.
 * [Vimwiki Markdown](https://pypi.org/project/vimwiki-markdown/): Convert 
   Vimwiki to HTML
 * [Dark VimWiki Template](https://github.com/rahul13ramesh/Dark-Vimwiki-Template): 
-  Template for Vimwiki HTML formatting
+  Template for Vimwiki HTML formatting. Download the files in the repo - 
+  they will be used in the installation below.
 * [The Silver Searcher](https://geoff.greer.fm/ag/): fast drop-in replacement for ack
 * [fzf](https://github.com/junegunn/fzf): fuzzy find engine
 * [universal-ctags](https://ctags.io/): creates tags used by vim for code 
@@ -20,7 +23,7 @@
 #### Optional (but recommended)
 * [DiffMerge](https://sourcegear.com/diffmerge/): Git diff/merge tool 
   (however see note below if you do not install it)
-* NeoVim
+* NeoVim.  If you install NeoVim you will also need to install pynvim.
 
 ### Installation 
 (TODO: Update the instructions as this isn't actually correct.
