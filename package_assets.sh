@@ -38,8 +38,14 @@ VIM_PLUG_BUNDLES=$HOME/.EverVim.bundles
 # Custom scripts written to support plugins
 VIM_CUSTOM_SCRIPTS_DIR=custom_scripts
 
+# For CoC (Conqueror of Completion) plugin
+VIM_COC_CONFIG=coc-settings.json
+
 # Dir containing filetype overrides
 PLUGIN_AFTER_FTPLUGIN_DIR=bundle/vim/after/ftplugin
+
+# Extra files to be sourced last 
+VIM_AFTER=after
 
 # Ctags configuration dir
 CTAGS_CONFIG_DIR=$HOME/.ctags.d
@@ -59,11 +65,13 @@ cp $VIMRC .
 cp $VIMRC_AFTER .
 cp $VIM_PLUG_BUNDLES .
 cp -R $VIM_HOME/$VIM_CUSTOM_SCRIPTS_DIR $LOCAL_VIM_HOME
+cp $VIM_HOME/$VIM_COC_CONFIG $LOCAL_VIM_HOME
 
 # This is where any filetype-specific overrides should go.  Some of these
 # would work in .vimrc, but for example certain autocmd overrides *must*
 # be specified inside an ftplugin script.  for example, 
 cp -R $VIM_HOME/$PLUGIN_AFTER_FTPLUGIN_DIR $LOCAL_VIM_HOME/$PLUGIN_AFTER_FTPLUGIN_DIR
+cp -R $VIM_HOME/$VIM_AFTER $LOCAL_VIM_HOME
 cp -R $CTAGS_CONFIG_DIR .
 
 # Set up Git

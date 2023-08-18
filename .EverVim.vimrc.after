@@ -4,11 +4,23 @@
 " TODO: for some reason <leader> in .EverVim.vimrc is picking up the value
 " of local leader.  figure out why, but workaround for now is to put any
 " remaps that start with the leader in this file instead.
-"
 
+"set textwidth=80
+set wrapmargin=0
+set wrap
+set linebreak " (optional - breaks by word rather than character)
+
+"let g:solarized_visibility="high"
 let g:nerdtree_tabs_synchronize_view=1
 let g:nerdtree_tabs_open_on_new_tab=1
 let g:vimwiki_folding="expr:quick"
+
+" for 'vim-test/vim-test'
+let test#strategy="neovim"
+
+" hotkey for editing the custom .EverVim.vimrc.after file
+nnoremap <leader>ea :sp ~/.EverVim.vimrc.after<CR>
+nnoremap <Leader>vp :sp<CR>:VimwikiIndex<CR>
 
 nnoremap <Leader>tg :TagbarToggle<CR>
 "nnoremap <Leader>nt :NERDTreeToggle<CR> :NERDTreeTabsToggle<CR>
@@ -21,3 +33,13 @@ nnoremap <Leader>bw :bwipeout<CR>
 command ListShortcuts Redir verbose map
 nnoremap <leader>sh :ListShortcuts<CR>
 
+" EverVim provides a config to clear search highlighting, but it
+" doesn't allow you to customize the key used (they use <leader>/)
+" nnoremap <silent> g<CR> :nohlsearch<BAR>:echo<CR>
+nnoremap <silent> g<CR> :set invhlsearch<CR>
+
+" replace a.vim mappings with vim-projectionist
+nnoremap <Leader>ia :A<CR>
+nnoremap <Leader>is :AS<CR>
+
+source ~/.EverVim/after/vimrc/coc.vimrc  

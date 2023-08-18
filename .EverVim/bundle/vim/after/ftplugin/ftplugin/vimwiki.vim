@@ -1,3 +1,5 @@
+set textwidth=80
+
 augroup ResolveConflicts
 
     au BufEnter <buffer> setlocal tw=80

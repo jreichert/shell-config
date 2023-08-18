@@ -19,6 +19,7 @@
   navigation (may work with exuberant ctags but unsure)
 * [YouCompleteMe](https://ycm-core.github.io/YouCompleteMe/): Code completion engine
 * GNU coreutils: `brew install coreutils`
+* [LS COLORS PROFILE](LS Colors pro): a good set of custom colors for use with LS.
 
 #### Optional (but recommended)
 * [DiffMerge](https://sourcegear.com/diffmerge/): Git diff/merge tool 
@@ -129,6 +130,8 @@ customizations.  Here are a few important ones:
 In order to update the contents of this repo, run the package_assets.sh script 
 in this project, `git commit`, then `git push origin`.
 
+## TODO
+* Figure out how to automatically export color presets from iTerm
 ## Reference
 ctags and the Vim Tagbar plugin have poor support for .tsx files.
 Installing this package should make this work better with no additional

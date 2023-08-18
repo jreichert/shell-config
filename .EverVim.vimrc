@@ -36,7 +36,8 @@ let g:evervim_bundle_groups=[
             \]
 
 " Determine whether the current session supports full gui colors or only
-" console colors
+" console colors; note that iTerm2 will use gtermfg/bg instead of
+" ctermfg/bg even though it's not really a gui app.
 if $TERM =~ '^\(rxvt\                                                                                                                                                                          screen\  interix\  putty\)\(-.*\)\?$'
     set notermguicolors
 elseif $TERM =~ '^\(tmux\                                                                                                                                                                      iterm\   vte\      gnome\)\(-.*\)\?$'
@@ -58,7 +59,8 @@ endif
 " Color Theme
 " Use :Colors for a list of available colorschemes
 "let g:evervim_color_theme="0x7A69_dark"
-let g:evervim_color_theme="solarized8_dark_high"
+"let g:evervim_color_theme="solarized8_dark_high"
+let g:evervim_color_theme="solarized8_high"
 let g:evervim_airline_theme="solarized_flood"
 "   let g:evervim_light_background = 1
 
@@ -144,7 +146,7 @@ let g:evervim_localleader='\\'
 "   let g:evervim_nerdtree_tabs_sync = 1
 
 " Clear search highlighting
-let g:evervim_clear_search_highlight = 0
+" let g:evervim_clear_search_highlight = 0
 
 " Disable neosnippet expansion
 " This maps over <C-k> and does some Supertab
@@ -212,6 +214,14 @@ let g:evervim_apply_config_mapping='<leader>ac'
 "
 " Set shell for terminal emulator
 set shell=/bin/zsh
+set textwidth=100
+" set textwidth=0
+" set wrapmargin=0
+" set wrap
+" set linebreak " (optional - breaks by word rather than character)
+
+set updatetime=300
+set signcolumn=yes
 
 " This tells vim that iterm2 supports gui colors &
 " therefore should use them instead of basic console colors.
@@ -226,12 +236,17 @@ set rtp+=/usr/local/opt/fzf
 " Turn of highlighting from last search with an extra <CR>.
 " Does not currently work; the "wildfire fuel" plugin is highlighting <CR>
 " to do a visual select of the current block.
-nnoremap <silent> <CR> :nohlsearch<BAR>:echo<CR>
+" nnoremap <silent> <CR> :nohlsearch<BAR>:echo<CR>
+"hnnoremap <silent> <Leader>h :nohlsearch<BAR>:echo<CR>
 
 " shortcut to completely close the current buffer;
 " NOTE: this kills Vim if used with NERDTree.  For that, use the bufkil plugin
 " instead (:BD)
 nnoremap <Leader>bw :bwipeout<CR>
+
+" replace a.vim mappings with vim-projectionist
+nnoremap <Leader>ia :A<CR>
+nnoremap <Leader>is :AS<CR>
 
 function s:format_shortcuts()
     "ListShortcuts
@@ -344,7 +359,7 @@ augroup END
 "  let g:vim_markdown_folding_disabled=1
 let g:vimwiki_global_ext = 0
 let g:vimwiki_list = [{'path': '~/Documents/vimwiki/',
-            \ 'syntax': 'markdown', 'ext': '.md', 'auto_toc': 1, 'auto_tags': 1,
+            \ 'syntax': 'markdown', 'ext': '.md', 'auto_toc': 1, 'auto_tags': 1, 'automatic_nested_syntaxes': 1,
             \ 'custom_wiki2html': '/Users/jake/.asdf/installs/python/3.10.10/lib/python3.10/site-packages/vimwiki_markdown.py',
             \ 'template_path': '~/.EverVim/wiki/templates',
             \ 'template_default': 'def_template',
@@ -470,3 +485,4 @@ let g:tagbar_type_vimwiki = {
             \ , 'ctagsargs': 'default'
             \ }
 " }
+ autocmd CursorHold * silent call CocActionAsync('highlight')
