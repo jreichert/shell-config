@@ -222,6 +222,7 @@ set textwidth=100
 
 set updatetime=300
 set signcolumn=yes
+set switchbuf=useopen
 
 " This tells vim that iterm2 supports gui colors &
 " therefore should use them instead of basic console colors.
@@ -243,10 +244,6 @@ set rtp+=/usr/local/opt/fzf
 " NOTE: this kills Vim if used with NERDTree.  For that, use the bufkil plugin
 " instead (:BD)
 nnoremap <Leader>bw :bwipeout<CR>
-
-" replace a.vim mappings with vim-projectionist
-nnoremap <Leader>ia :A<CR>
-nnoremap <Leader>is :AS<CR>
 
 function s:format_shortcuts()
     "ListShortcuts

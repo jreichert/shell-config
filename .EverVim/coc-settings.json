@@ -1,5 +1,6 @@
 {
   "coc.preferences.formatOnSave": true,
+  "coc.preferences.jumpCommand": "drop",
   "colors.enable": true,
   "highlight.trace": "verbose",
   "suggest.floatConfig": {

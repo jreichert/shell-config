@@ -41,5 +41,19 @@ nnoremap <silent> g<CR> :set invhlsearch<CR>
 " replace a.vim mappings with vim-projectionist
 nnoremap <Leader>ia :A<CR>
 nnoremap <Leader>is :AS<CR>
+nnoremap <Leader>iv :AV<CR>
+nnoremap <Leader>it :AT<CR>
+nnoremap <Leader>io :AO<CR>
+
+" Improved Coc navigation - move to COC file below
+nmap <silent> \ge <Plug>(coc-definition)
+nmap <silent> \gs :sp<CR><Plug>(coc-definition)
+nmap <silent> \gv :vsp<CR><Plug>(coc-definition)
+nmap <silent> \gt :vsp<CR><Plug>(coc-definition)<C-W>T
+
+" testrunner integration
+nnoremap <Leader>tc :TestNearest<CR>
+nnoremap <Leader>ta :TestFile<CR>
+
 
 source ~/.EverVim/after/vimrc/coc.vimrc  

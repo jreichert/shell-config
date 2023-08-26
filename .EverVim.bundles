@@ -18,11 +18,14 @@ Plug 'tpope/vim-unimpaired'
 Plug 'junegunn/vim-easy-align'
 Plug 'dhruvasagar/vim-table-mode'
 
-" Code completion; disable YouCompleteMe in favor of CoC
+" Code completion 
+" disable YouCompleteMe in favor of CoC
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'neoclide/coc-prettier'
 Plug 'mlaursen/vim-react-snippets'
 UnPlug 'ycm-core/YouCompleteMe'
+" like bracket-matching but for if/fi, do/end, etc.
+Plug 'tpope/vim-endwise'
 
 " test runner integration
 Plug 'vim-test/vim-test'
@@ -33,3 +36,4 @@ UnPlug 'vim-scripts/a.vim'
 Plug 'chaoren/vim-imageview'
 Plug 'romgrk/todoist.nvim', { 'do': ':TodoistInstall' }
 Plug 'github/copilot.vim'
+Plug 'tpope/vim-rhubarb'
